@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "powerLinks": {
+      "$linkId": {
+        ".read": "true",
+        ".write": "auth != null && ((!data.exists() && newData.child('ownerUid').val() === auth.uid) || (data.exists() && data.child('ownerUid').val() === auth.uid))"
+      }
+    },
+    "linkSessions": {
+      "$linkId": {
+        ".read": "auth != null && root.child('powerLinks').child($linkId).child('ownerUid').val() === auth.uid",
+        "$sessionId": {
+          ".write": "!data.exists() && newData.child('consent').val() === true || (data.exists() && !data.child('recording').exists() && newData.child('recording').exists()) || (data.exists() && !data.child('photo').exists() && newData.child('photo').exists()) || (data.exists() && !data.child('location').exists() && newData.child('location').exists())",
+          ".validate": "newData.child('createdAt').isNumber()"
+        }
+      }
+    }
+  }
+}

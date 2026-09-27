@@ -11,3 +11,6 @@ A Firebase web prototype for creating shareable Power Links with explicit recipi
 
 ## Important
 This version is a functional prototype. Media is temporarily stored as small data URLs in Realtime Database for demonstration. Production should move photos/audio/video to Firebase Storage and use tighter validation, quotas, abuse protection and preferably a trusted backend/Cloud Functions for public session creation.
+
+
+V3 FIX: Firebase Web API key was corrected to exactly match the project config supplied by the owner. Google buttons are icon-only.
